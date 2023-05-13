@@ -41,7 +41,10 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter = ContactsAdapter()
+        val adapter = ContactsAdapter{ index ->
+            viewModel.allContacts.value?.get(index)?.id
+            startActivity(Intent(this, EditContactActivity::class.java))
+        }
 
         viewModel.allContacts.observe(this) {
             adapter.setData(it)
