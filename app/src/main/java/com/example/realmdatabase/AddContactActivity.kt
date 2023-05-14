@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.realmdatabase.databinding.ActivityAddContactBinding
-import com.example.realmdatabase.presenter.MainAction
+import com.example.realmdatabase.presenter.Action
 import org.koin.android.ext.android.inject
 
-class AddContactActivity : AppCompatActivity(), MainAction {
+class AddContactActivity : AppCompatActivity(), Action {
 
     private lateinit var binding: ActivityAddContactBinding
 
@@ -32,7 +32,7 @@ class AddContactActivity : AppCompatActivity(), MainAction {
         }
     }
 
-    override fun onAddContact(contacts: List<Contact>) {
-        Toast.makeText(this, contacts.last().name, Toast.LENGTH_SHORT).show()
+    override fun showMessage() {
+        Toast.makeText(this, "контакт добавлен", Toast.LENGTH_SHORT).show()
     }
 }

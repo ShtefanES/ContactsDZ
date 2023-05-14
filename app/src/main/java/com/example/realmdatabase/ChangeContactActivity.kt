@@ -2,17 +2,17 @@ package com.example.realmdatabase
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.realmdatabase.presenter.MainAction
 import org.koin.android.ext.android.inject
 import android.content.Context
 import android.content.Intent
 import android.widget.Button
+import android.widget.Toast
 import com.example.realmdatabase.databinding.ActivityChangeContactBinding
+import com.example.realmdatabase.presenter.Action
 
-class ChangeContactActivity : AppCompatActivity(), MainAction {
+class ChangeContactActivity : AppCompatActivity(),Action {
     private val presenter: Presenter by inject()
     private lateinit var binding: ActivityChangeContactBinding
-    private lateinit var btnSaveChanges: Button
 
     companion object {
         private const val ID_KEY = "ID_KEY"
@@ -64,7 +64,11 @@ class ChangeContactActivity : AppCompatActivity(), MainAction {
 
     }
 
-    override fun onAddContact(contacts: List<Contact>) {
 
+
+    override fun showMessage() {
+        Toast.makeText(this, "контакт изменён", Toast.LENGTH_SHORT).show()
     }
+
+
 }

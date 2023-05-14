@@ -32,7 +32,6 @@ class ContactRepositoryImpl(
             contact?.name = name
             contact?.surname = surname
             contact?.number = number
-
         }
     }
 

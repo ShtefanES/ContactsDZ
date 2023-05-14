@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter = ContactsAdapter{ index ->
+        val adapter = ContactsAdapter { index ->
             val changeableContact = viewModel.allContacts.value?.get(index)
             startActivity(ChangeContactActivity.createIntent(this,
                 id = changeableContact?.id,

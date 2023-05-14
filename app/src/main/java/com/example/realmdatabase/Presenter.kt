@@ -1,19 +1,18 @@
 package com.example.realmdatabase
 
-import com.example.realmdatabase.presenter.MainAction
+import com.example.realmdatabase.presenter.Action
 
 class Presenter(private val contactRepository: ContactRepository) {
 
-    private var mainAction: MainAction? = null
+    private var action: Action? = null
 
-
-    fun initAction(mainAction: MainAction) {
-        this.mainAction = mainAction
+    fun initAction(action: Action) {
+        this.action = action
     }
 
     fun addContact(name: String, surname: String, number: String) {
         contactRepository.addContact(name, surname, number)
-        mainAction?.onAddContact(contactRepository.getContact())
+        action?.showMessage()
     }
 
     fun changeContact(id: String?, name: String?, surname: String?, number: String?) {
@@ -23,5 +22,6 @@ class Presenter(private val contactRepository: ContactRepository) {
             surname = surname,
             number = number
         )
+        action?.showMessage()
     }
 }

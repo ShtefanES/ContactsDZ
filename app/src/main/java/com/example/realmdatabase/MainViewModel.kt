@@ -9,11 +9,6 @@ class MainViewModel(private val contactRepository: ContactRepository) : ViewMode
     val allContacts: ContactLiveData
         get() = getAllContacts() as ContactLiveData
 
-    fun addContact(name: String, surname: String, number: String) {
-
-        contactRepository.addContact(name, surname, number)
-    }
-
     private fun getAllContacts(): MutableLiveData<List<Contact>> {
         val list = ContactLiveData()
         val allContacts = contactRepository.getContact()
