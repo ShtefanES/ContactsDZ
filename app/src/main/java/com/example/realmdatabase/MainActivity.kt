@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         lifecycle.addObserver(defaultLifecycleObserver)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -54,6 +53,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
             adapter.setData(it)
         }
 
+
         binding.rvContacts.adapter = adapter
 
         binding.fabAddContact.setOnClickListener {
@@ -65,4 +65,8 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         super.onDestroy()
         lifecycle.removeObserver(defaultLifecycleObserver)
     }
+
+
+
+
 }

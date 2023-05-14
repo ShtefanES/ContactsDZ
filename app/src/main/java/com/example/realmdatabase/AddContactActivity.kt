@@ -1,5 +1,6 @@
 package com.example.realmdatabase
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +19,7 @@ class AddContactActivity : AppCompatActivity(), Action {
 
         presenter.initAction(this)
 
-       binding = ActivityAddContactBinding.inflate(layoutInflater)
+        binding = ActivityAddContactBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.btnSave.setOnClickListener {
@@ -30,6 +31,11 @@ class AddContactActivity : AppCompatActivity(), Action {
                 )
             }
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, MainActivity::class.java))
     }
 
     override fun showMessage() {

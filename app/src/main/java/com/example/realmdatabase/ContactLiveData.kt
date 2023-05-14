@@ -1,8 +1,6 @@
 package com.example.realmdatabase
 
 import android.util.Log
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 
 class ContactLiveData : MutableLiveData<List<Contact>>() {

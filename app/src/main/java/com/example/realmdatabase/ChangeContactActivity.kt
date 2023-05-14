@@ -63,7 +63,10 @@ class ChangeContactActivity : AppCompatActivity(),Action {
         }
 
     }
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this,MainActivity::class.java))
+    }
 
 
     override fun showMessage() {
