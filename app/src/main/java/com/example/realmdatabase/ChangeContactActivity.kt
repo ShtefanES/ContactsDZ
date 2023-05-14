@@ -88,7 +88,7 @@ class ChangeContactActivity : AppCompatActivity(), Action {
 
 
     override fun showMessage() {
-        Toast.makeText(this, "контакт изменён", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.change_contact_message), Toast.LENGTH_SHORT).show()
     }
 
 

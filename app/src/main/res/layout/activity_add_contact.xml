@@ -10,14 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Имя" />
+        android:hint="@string/first_name" />
 
     <EditText
         android:id="@+id/etSurname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Фамилия" />
+        android:hint="@string/surname" />
 
     <EditText
         android:id="@+id/etNumber"
@@ -25,7 +25,7 @@
 
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Номер телефона" />
+        android:hint="@string/number" />
 
     <Button
         android:id="@+id/btnSave"
@@ -33,6 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="64dp"
         android:layout_marginTop="8dp"
-        android:text="Сохранить контакт" />
+        android:text="@string/save_contact" />
 
 </LinearLayout>

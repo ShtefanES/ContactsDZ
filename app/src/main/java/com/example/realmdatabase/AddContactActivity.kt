@@ -39,6 +39,6 @@ class AddContactActivity : AppCompatActivity(), Action {
     }
 
     override fun showMessage() {
-        Toast.makeText(this, "контакт добавлен", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.add_contact_message), Toast.LENGTH_SHORT).show()
     }
 }
