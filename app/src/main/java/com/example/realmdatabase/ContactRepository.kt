@@ -6,5 +6,5 @@ interface ContactRepository {
 
     fun getContact(): List<Contact>
 
-   fun changeContact(idContact:String?, name: String?, surname: String?, number: String?)
+   fun changeContact(contact: Contact)
 }

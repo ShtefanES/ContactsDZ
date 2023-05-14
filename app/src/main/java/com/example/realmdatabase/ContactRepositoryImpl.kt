@@ -21,17 +21,15 @@ class ContactRepositoryImpl(
     }
 
     override fun changeContact(
-        idContact: String?,
-        name: String?,
-        surname: String?,
-        number: String?
+        contact:Contact
     ) {
         realm.executeTransaction {
-            val contact: Contact? =
-                it.where(Contact::class.java).equalTo("id", idContact).findFirst()
-            contact?.name = name
-            contact?.surname = surname
-            contact?.number = number
+            val contactFromDatabase: Contact? =
+                it.where(Contact::class.java).equalTo("id", contact.id).findFirst()
+
+            contactFromDatabase?.name = contact.name
+            contactFromDatabase?.surname = contact.surname
+            contactFromDatabase?.number = contact.number
         }
     }
 

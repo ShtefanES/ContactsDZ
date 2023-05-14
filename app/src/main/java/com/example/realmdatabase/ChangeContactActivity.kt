@@ -5,17 +5,14 @@ import android.os.Bundle
 import org.koin.android.ext.android.inject
 import android.content.Context
 import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
-import android.widget.Button
 import android.widget.Toast
 import com.example.realmdatabase.databinding.ActivityChangeContactBinding
 import com.example.realmdatabase.presenter.Action
 
-class ChangeContactActivity : AppCompatActivity(),Action {
+class ChangeContactActivity : AppCompatActivity(), Action {
     private val presenter: Presenter by inject()
-    private lateinit var binding: ActivityChangeContactBinding
 
     companion object {
         private const val ID_KEY = "ID_KEY"
@@ -38,38 +35,55 @@ class ChangeContactActivity : AppCompatActivity(),Action {
         }
     }
 
+    private var changeableContact: Contact = Contact()
+    private val binding by lazy { ActivityChangeContactBinding.inflate(layoutInflater) }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         presenter.initAction(this)
-
-        binding = ActivityChangeContactBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val id = intent.getStringExtra(ID_KEY)
-        val name = intent.getStringExtra(NAME_KEY)
-        val surname = intent.getStringExtra(SURNAME_KEY)
-        val number = intent.getStringExtra(NUMBER_KEY)
+        with(changeableContact){
+            id = intent.getStringExtra(ID_KEY) ?: ""
+            name = intent.getStringExtra(NAME_KEY) ?: ""
+            surname = intent.getStringExtra(SURNAME_KEY) ?: ""
+            number = intent.getStringExtra(NUMBER_KEY) ?: ""
+        }
+
+
 
         with(binding) {
-            changeEtName.setText(name)
-            changeEtSurname.setText(surname)
-            changeEtNumber.setText(number)
+            changeEtName.setText(changeableContact.name)
+            changeEtSurname.setText(changeableContact.surname)
+            changeEtNumber.setText(changeableContact.number)
 
             btnSaveChange.setOnClickListener {
-                presenter.changeContact(
-                    id = id,
-                    name = changeEtName.text.toString(),
-                    surname = changeEtSurname.text.toString(),
-                    number = changeEtNumber.text.toString()
-                )
+                presenter.changeContact()
             }
         }
 
     }
+
+    fun getChangeableContact(): Contact {
+        with(changeableContact){
+            name = binding.changeEtName.text.toString()
+            surname = binding.changeEtSurname.text.toString()
+            number = binding.changeEtNumber.text.toString()
+        }
+        return changeableContact
+    }
+
+
     override fun onBackPressed() {
         super.onBackPressed()
-        startActivity(Intent(this,MainActivity::class.java).setFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TOP))
+        startActivity(
+            Intent(
+                this,
+                MainActivity::class.java
+            ).setFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TOP)
+        )
     }
 
 

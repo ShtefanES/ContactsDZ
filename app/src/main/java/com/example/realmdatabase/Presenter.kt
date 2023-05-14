@@ -15,12 +15,10 @@ class Presenter(private val contactRepository: ContactRepository) {
         action?.showMessage()
     }
 
-    fun changeContact(id: String?, name: String?, surname: String?, number: String?) {
+    fun changeContact() {
+        val changeContactActivity: ChangeContactActivity = action as ChangeContactActivity
         contactRepository.changeContact(
-            idContact = id,
-            name = name,
-            surname = surname,
-            number = number
+            changeContactActivity.getChangeableContact()
         )
         action?.showMessage()
     }

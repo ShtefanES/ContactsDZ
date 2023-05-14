@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
         binding.fabAddContact.setOnClickListener {
             val intent = Intent(this, AddContactActivity::class.java)
-           // intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
         }
     }
@@ -73,10 +72,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         lifecycle.removeObserver(defaultLifecycleObserver)
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
-    }
+
 
 
 }
