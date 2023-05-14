@@ -5,6 +5,9 @@ import android.os.Bundle
 import org.koin.android.ext.android.inject
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.widget.Button
 import android.widget.Toast
 import com.example.realmdatabase.databinding.ActivityChangeContactBinding
@@ -31,6 +34,7 @@ class ChangeContactActivity : AppCompatActivity(),Action {
             putExtra(NAME_KEY, name)
             putExtra(SURNAME_KEY, surname)
             putExtra(NUMBER_KEY, number)
+
         }
     }
 
@@ -65,7 +69,7 @@ class ChangeContactActivity : AppCompatActivity(),Action {
     }
     override fun onBackPressed() {
         super.onBackPressed()
-        startActivity(Intent(this,MainActivity::class.java))
+        startActivity(Intent(this,MainActivity::class.java).setFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TOP))
     }
 
 

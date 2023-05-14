@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         }
     }
 
-    private val viewModel : MainViewModel by viewModel()
+    private val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,25 +39,33 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         setContentView(binding.root)
 
         val adapter = ContactsAdapter { index ->
-            val changeableContact = viewModel.allContacts.value?.get(index)
-            startActivity(ChangeContactActivity.createIntent(this,
-                id = changeableContact?.id,
-                name = changeableContact?.name,
-                surname = changeableContact?.surname,
-                number = changeableContact?.number
-                )
-            )
+            viewModel.onButtonClickedChangeContact(index)
         }
 
         viewModel.allContacts.observe(this) {
             adapter.setData(it)
         }
+        viewModel.goChangeContactScreenEvent.observe(this, ::startChangeContactActivity)
 
         binding.rvContacts.adapter = adapter
 
         binding.fabAddContact.setOnClickListener {
-            startActivity(Intent(this, AddContactActivity::class.java))
+            val intent = Intent(this, AddContactActivity::class.java)
+           // intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
         }
+    }
+
+    private fun startChangeContactActivity(contact: Contact) {
+        startActivity(
+            ChangeContactActivity.createIntent(
+                this,
+                id = contact.id,
+                name = contact.name,
+                surname = contact.surname,
+                number = contact.number
+            )
+        )
     }
 
     override fun onDestroy() {
@@ -65,7 +73,10 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         lifecycle.removeObserver(defaultLifecycleObserver)
     }
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 
 
 }
