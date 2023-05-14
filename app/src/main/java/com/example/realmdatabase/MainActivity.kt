@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
             adapter.setData(it)
         }
 
-
         binding.rvContacts.adapter = adapter
 
         binding.fabAddContact.setOnClickListener {
