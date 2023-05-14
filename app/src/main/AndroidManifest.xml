@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RealmDatabase">
         <activity
-            android:name=".EditContactActivity"
+            android:name=".ChangeContactActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

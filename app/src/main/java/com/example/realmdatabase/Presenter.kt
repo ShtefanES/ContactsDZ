@@ -15,4 +15,8 @@ class Presenter(private val contactRepository: ContactRepository) {
         contactRepository.addContact(name, surname, number)
         mainAction?.onAddContact(contactRepository.getContact())
     }
+
+    fun changeContact(id:String){
+        contactRepository.changeContact(id)
+    }
 }

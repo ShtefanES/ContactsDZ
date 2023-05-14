@@ -18,7 +18,7 @@ class AddContactActivity : AppCompatActivity(), MainAction {
 
         presenter.initAction(this)
 
-        binding = ActivityAddContactBinding.inflate(layoutInflater)
+       binding = ActivityAddContactBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.btnSave.setOnClickListener {

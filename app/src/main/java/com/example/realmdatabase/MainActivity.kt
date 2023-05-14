@@ -4,10 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import androidx.lifecycle.*
 import com.example.realmdatabase.databinding.ActivityMainBinding
-import io.realm.Realm
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), LifecycleObserver {
@@ -42,8 +40,14 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         setContentView(binding.root)
 
         val adapter = ContactsAdapter{ index ->
-            viewModel.allContacts.value?.get(index)?.id
-            startActivity(Intent(this, EditContactActivity::class.java))
+            val changeableContact = viewModel.allContacts.value?.get(index)
+            startActivity(ChangeContactActivity.createIntent(this,
+                id = changeableContact?.id,
+                name = changeableContact?.name,
+                surname = changeableContact?.surname,
+                number = changeableContact?.number
+                )
+            )
         }
 
         viewModel.allContacts.observe(this) {

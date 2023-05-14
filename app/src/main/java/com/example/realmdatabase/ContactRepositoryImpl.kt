@@ -19,4 +19,8 @@ class ContactRepositoryImpl(
     override fun getContact(): List<Contact> {
         return realm.where(Contact::class.java).findAll()
     }
+
+    override fun changeContact(idContact: String) {
+
+    }
 }
