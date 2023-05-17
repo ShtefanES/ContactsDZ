@@ -1,10 +1,13 @@
-package com.example.realmdatabase
+package com.example.realmdatabase.mainscreen
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.realmdatabase.addscreen.AddContactActivity
+import com.example.realmdatabase.changescren.ChangeContactActivity
+import com.example.realmdatabase.data.model.Contact
 import com.example.realmdatabase.databinding.ActivityMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,8 +41,8 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter = ContactsAdapter { index ->
-            viewModel.onButtonClickedChangeContact(index)
+        val adapter = ContactsAdapter { contact ->
+            viewModel.editContact(contact)
         }
 
         viewModel.allContacts.observe(this) {
@@ -59,10 +62,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         startActivity(
             ChangeContactActivity.createIntent(
                 this,
-                id = contact.id,
-                name = contact.name,
-                surname = contact.surname,
-                number = contact.number
+                contact
             )
         )
     }
@@ -71,8 +71,6 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         super.onDestroy()
         lifecycle.removeObserver(defaultLifecycleObserver)
     }
-
-
 
 
 }

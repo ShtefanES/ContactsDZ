@@ -1,0 +1,75 @@
+package com.example.realmdatabase.changescren
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import org.koin.android.ext.android.inject
+import android.content.Context
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.widget.EditText
+import android.widget.Toast
+import com.example.realmdatabase.R
+import com.example.realmdatabase.data.model.Contact
+import com.example.realmdatabase.databinding.ActivityChangeContactBinding
+import com.example.realmdatabase.mainscreen.MainActivity
+import org.koin.core.parameter.parametersOf
+
+class ChangeContactActivity : AppCompatActivity(), ChangeContactView {
+
+    private val presenter: ChangeContactPresenter by inject { parametersOf(changeableContact) }
+    private val changeableContact: Contact by lazy { intent.getParcelableExtra<Contact>(ID_CONTACT) as Contact }
+    private val binding by lazy { ActivityChangeContactBinding.inflate(layoutInflater) }
+
+    private val etName: EditText by lazy { binding.changeEtName }
+    private val etSurname: EditText by lazy { binding.changeEtSurname }
+    private val etNumber: EditText by lazy { binding.changeEtNumber }
+
+    companion object {
+        private const val ID_CONTACT = "ID_CONTACT"
+        fun createIntent(
+            context: Context,
+            contact: Contact
+        ):
+                Intent =
+            Intent(context, ChangeContactActivity::class.java).putExtra(ID_CONTACT, contact)
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        presenter.initAction(this)
+        setContentView(binding.root)
+
+        with(binding) {
+            btnSaveChange.setOnClickListener {
+                presenter.onChangeContactClicked(
+                    name = changeEtName.text.toString(),
+                    surname = changeEtSurname.text.toString(),
+                    number = changeEtNumber.text.toString()
+                )
+            }
+        }
+    }
+
+    override fun prefillContact(contact: Contact) {
+        etName.setText(contact.name)
+        etSurname.setText(contact.surname)
+        etNumber.setText(contact.number)
+    }
+
+    override fun showChangeContactSuccessInfo() {
+        Toast.makeText(this, getString(R.string.change_contact_message), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(
+            Intent(
+                this,
+                MainActivity::class.java
+            ).setFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TOP)
+        )
+    }
+}

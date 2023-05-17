@@ -1,15 +1,17 @@
-package com.example.realmdatabase
+package com.example.realmdatabase.mainscreen
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.realmdatabase.data.model.Contact
+import com.example.realmdatabase.data.ContactRepository
 
 class MainViewModel(private val contactRepository: ContactRepository) : ViewModel() {
     private val _goChangeContactScreenEvent = SingleLiveEvent<Contact>()
     val goChangeContactScreenEvent: LiveData<Contact> = _goChangeContactScreenEvent
-     val allContacts: ContactLiveData
-     get() = getAllContacts() as ContactLiveData
+    val allContacts: ContactLiveData
+        get() = getAllContacts() as ContactLiveData
 
 
     private fun getAllContacts(): MutableLiveData<List<Contact>> {
@@ -19,10 +21,9 @@ class MainViewModel(private val contactRepository: ContactRepository) : ViewMode
         return list
     }
 
-    fun onButtonClickedChangeContact(index:Int){
-        _goChangeContactScreenEvent.value = allContacts.value?.get(index)
+    fun editContact(contact: Contact) {
+        _goChangeContactScreenEvent.value = contact
     }
-
 
     override fun onCleared() {
         super.onCleared()

@@ -1,9 +1,10 @@
 package com.example.realmdatabase.di
 
-import com.example.realmdatabase.ContactRepository
-import com.example.realmdatabase.ContactRepositoryImpl
-import com.example.realmdatabase.MainViewModel
-import com.example.realmdatabase.Presenter
+import com.example.realmdatabase.changescren.ChangeContactPresenter
+import com.example.realmdatabase.data.ContactRepository
+import com.example.realmdatabase.data.ContactRepositoryImpl
+import com.example.realmdatabase.mainscreen.MainViewModel
+import com.example.realmdatabase.addscreen.AddContactPresenter
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import org.koin.android.ext.koin.androidApplication
@@ -36,7 +37,13 @@ val appModule = module {
         MainViewModel(contactRepository = get())
     }
 
-    single {
-        Presenter(contactRepository = get())
+    single<AddContactPresenter> {
+        AddContactPresenter(contactRepository = get())
     }
+
+    single<ChangeContactPresenter> { params ->
+        ChangeContactPresenter(contactRepository = get(), contact = params[0])
+    }
+
+
 }

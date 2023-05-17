@@ -1,4 +1,4 @@
-package com.example.realmdatabase
+package com.example.realmdatabase.mainscreen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,10 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.realmdatabase.data.model.Contact
 import com.example.realmdatabase.databinding.ItemContactBinding
 
-class ContactsAdapter(val onEditButtonClicked: (Int) -> Unit) :
+class ContactsAdapter(val onEditButtonClicked: (Contact) -> Unit) :
     ListAdapter<Contact, ContactsAdapter.MyViewHolder>(MyDiffUtil) {
 
     object MyDiffUtil : DiffUtil.ItemCallback<Contact>() {
@@ -46,7 +47,7 @@ class ContactsAdapter(val onEditButtonClicked: (Int) -> Unit) :
         holder.bind(note)
 
         holder.imageViewEdit.setOnClickListener {
-            onEditButtonClicked(position)
+            onEditButtonClicked(note)
         }
 
     }

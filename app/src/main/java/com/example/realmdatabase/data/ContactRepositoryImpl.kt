@@ -1,5 +1,6 @@
-package com.example.realmdatabase
+package com.example.realmdatabase.data
 
+import com.example.realmdatabase.data.model.Contact
 import io.realm.Realm
 import java.util.*
 
@@ -21,7 +22,7 @@ class ContactRepositoryImpl(
     }
 
     override fun changeContact(
-        contact:Contact
+        contact: Contact
     ) {
         realm.executeTransaction {
             val contactFromDatabase: Contact? =

@@ -1,30 +1,30 @@
-package com.example.realmdatabase
+package com.example.realmdatabase.addscreen
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.realmdatabase.R
 import com.example.realmdatabase.databinding.ActivityAddContactBinding
-import com.example.realmdatabase.presenter.Action
+import com.example.realmdatabase.mainscreen.MainActivity
 import org.koin.android.ext.android.inject
 
-class AddContactActivity : AppCompatActivity(), Action {
+class AddContactActivity : AppCompatActivity(), AddContactView {
 
     private lateinit var binding: ActivityAddContactBinding
-
-    private val presenter: Presenter by inject()
+    private val addContactPresenter: AddContactPresenter by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        presenter.initAction(this)
+        addContactPresenter.initView(this)
 
         binding = ActivityAddContactBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.btnSave.setOnClickListener {
             with(binding) {
-                presenter.addContact(
+                addContactPresenter.addContact(
                     name = etName.text.toString(),
                     surname = etSurname.text.toString(),
                     number = etNumber.text.toString()
@@ -33,12 +33,12 @@ class AddContactActivity : AppCompatActivity(), Action {
         }
     }
 
+    override fun showAddContactSuccessInfo() {
+        Toast.makeText(this, getString(R.string.add_contact_message), Toast.LENGTH_SHORT).show()
+    }
+
     override fun onBackPressed() {
         super.onBackPressed()
         startActivity(Intent(this, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP))
-    }
-
-    override fun showMessage() {
-        Toast.makeText(this, getString(R.string.add_contact_message), Toast.LENGTH_SHORT).show()
     }
 }

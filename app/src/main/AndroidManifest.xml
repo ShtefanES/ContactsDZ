@@ -11,10 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RealmDatabase">
         <activity
-            android:name=".ChangeContactActivity"
+            android:name=".changescren.ChangeContactActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".mainscreen.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddContactActivity"
+            android:name=".addscreen.AddContactActivity"
             android:exported="false" />
     </application>
 

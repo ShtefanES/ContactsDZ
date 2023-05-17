@@ -1,4 +1,4 @@
-package com.example.realmdatabase
+package com.example.realmdatabase.mainscreen
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner

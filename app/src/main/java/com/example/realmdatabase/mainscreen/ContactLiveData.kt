@@ -1,7 +1,8 @@
-package com.example.realmdatabase
+package com.example.realmdatabase.mainscreen
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.realmdatabase.data.model.Contact
 
 class ContactLiveData : MutableLiveData<List<Contact>>() {
 
