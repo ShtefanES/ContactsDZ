@@ -1,6 +1,7 @@
 package com.example.realmdatabase
 
 import com.example.realmdatabase.data.ContactRepositoryImpl
+import io.realm.Realm
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -14,7 +15,7 @@ class ExampleUnitTest {
 
     @Test
     fun testViewModel() {
-        val contactRepository = ContactRepositoryImpl()
+        val contactRepository
 
         val phone = "+88005553535"
 
@@ -24,11 +25,11 @@ class ExampleUnitTest {
             phone = "88005553535"
         )
 
-        contactRepository.addContact(contact)
-        val list = contactRepository.getAllContact()
+        contactRepository.addContact(contact.name,contact.surname,contact.phone)
+        val list = contactRepository.getContact()
         val lastContact = list.last()
 
         assertEquals(contact, lastContact)
-        assertNotEquals(phone, lastContact.phone)
+        assertNotEquals(phone, lastContact.number)
     }
 }

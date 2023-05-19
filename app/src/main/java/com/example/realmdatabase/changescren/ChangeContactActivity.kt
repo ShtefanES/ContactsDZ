@@ -17,6 +17,7 @@ import org.koin.core.parameter.parametersOf
 
 class ChangeContactActivity : AppCompatActivity(), ChangeContactView {
 
+
     private val presenter: ChangeContactPresenter by inject { parametersOf(changeableContact) }
     private val changeableContact: Contact by lazy { intent.getParcelableExtra<Contact>(ID_CONTACT) as Contact }
     private val binding by lazy { ActivityChangeContactBinding.inflate(layoutInflater) }
