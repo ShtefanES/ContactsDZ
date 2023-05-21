@@ -40,11 +40,11 @@ val appModule = module {
         MainViewModel(contactRepository = get())
     }
 
-    single<AddContactPresenter> {
+    factory {
         AddContactPresenter(contactRepository = get())
     }
 
-    single<ChangeContactPresenter> { params ->
+    factory { params ->
         ChangeContactPresenter(contactRepository = get(), contact = params[0])
     }
 
