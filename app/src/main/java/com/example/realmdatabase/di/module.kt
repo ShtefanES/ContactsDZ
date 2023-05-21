@@ -33,6 +33,8 @@ val appModule = module {
         ContactRepositoryImpl(realm = get())
     }
 
+
+
     viewModel {
         MainViewModel(contactRepository = get())
     }

@@ -3,9 +3,11 @@ package com.example.realmdatabase.mainscreen
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.realmdatabase.R
 import com.example.realmdatabase.data.model.Contact
 import com.example.realmdatabase.databinding.ItemContactBinding
 

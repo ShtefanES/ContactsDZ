@@ -1,32 +1,29 @@
 package com.example.realmdatabase
 
 
-
+import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
+import androidx.test.espresso.action.ViewActions.clearText
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
+import androidx.test.espresso.contrib.RecyclerViewActions.scrollToLastPosition
 import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
+import com.example.realmdatabase.mainscreen.ContactsAdapter
 import com.example.realmdatabase.mainscreen.MainActivity
-
+import org.hamcrest.Matcher
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import androidx.test.espresso.Espresso.onData
-import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.contrib.RecyclerViewActions.actionOnHolderItem
-import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItem
-import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
-import androidx.test.ext.junit.rules.ActivityScenarioRule
-import com.example.realmdatabase.mainscreen.ContactsAdapter
-import org.hamcrest.Matchers.allOf
-import org.hamcrest.Matchers.instanceOf
+
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -41,18 +38,18 @@ class ExampleInstrumentedTest {
 
 
     @Test
-    fun checkAllComponentIsVisible_isSuccess() {
-        onView(withId(R.id.fabAddContact)) //этот метод найдет для вас View по указанным вами критериям.
-            // В нашем случае, мы используем поиск по id (withId).
+    fun addContactCheck() {
+
+        onView(withId(R.id.fabAddContact))
             .check(matches(isDisplayed()))
-            .perform(click()) //действие
+            .perform(click())
 
         val name = "Nikita"
 
-        onView(withId(R.id.etName)) // находит нужную view
-            .check(matches(isDisplayed())) // проверка
-            .perform(typeText(name)) // действие
-            .check(matches(withText(name))) // проверка
+        onView(withId(R.id.etName))
+            .check(matches(isDisplayed()))
+            .perform(typeText(name))
+            .check(matches(withText(name)))
 
         val surname = "Panchenko"
 
@@ -61,7 +58,7 @@ class ExampleInstrumentedTest {
             .perform(typeText(surname))
             .check(matches(withText(surname)))
 
-        val phone = "+799999999"
+        val phone = "+799999990"
 
         onView(withId(R.id.etNumber))
             .check(matches(isDisplayed()))
@@ -72,17 +69,81 @@ class ExampleInstrumentedTest {
             .check(matches(isDisplayed()))
             .perform(click())
 
+        pressBack()
+        pressBack()
 
-           pressBack()
-           pressBack()
+    }
+
+    @Test
+    fun contactChangeCheck() {
+
+        fun clickItemWithId(id: Int): ViewAction {
+            return object : ViewAction {
+                override fun getConstraints(): Matcher<View>? {
+                    return null
+                }
+
+                override fun getDescription(): String {
+                    return "Click on a child view with specified id."
+                }
+
+                override fun perform(uiController: UiController, view: View) {
+                    val v = view.findViewById<View>(id) as View
+                    v.performClick()
+                }
+            }
+        }
+
+        var lastItemPositionRv = 0
+        activityScenarioRule.scenario.onActivity { activity ->
+            lastItemPositionRv =
+                activity.findViewById<RecyclerView>(R.id.rvContacts).adapter!!.itemCount - 1
+        }
+
+        onView(withId(R.id.rvContacts))
+            .perform(
+                actionOnItemAtPosition<ContactsAdapter.MyViewHolder>(
+                    lastItemPositionRv,
+                    clickItemWithId(R.id.imageView)
+                )
+            )
+
+        val newName = "Alex"
+
+        onView(withId(R.id.changeEtName))
+            .check(matches(isDisplayed()))
+            .perform(click())
+            .perform(clearText())
+            .perform(typeText(newName))
+
+        val newSurname = "Shrerder"
+
+        onView(withId(R.id.changeEtSurname))
+            .check(matches(isDisplayed()))
+            .perform(click())
+            .perform(clearText())
+            .perform(typeText(newSurname))
+
+        val newNumber = "9990245790"
+
+        onView(withId(R.id.changeEtNumber))
+            .check(matches(isDisplayed()))
+            .perform(click())
+            .perform(clearText())
+            .perform(typeText(newNumber))
+
+        onView(withId(R.id.btnSaveChange))
+            .check(matches(isDisplayed()))
+            .perform(click())
+
+        pressBack()
+        pressBack()
 
         onView(withId(R.id.rvContacts))
             .check(matches(isDisplayed()))
-            .perform()
-      //  onView(withId(R.id.imageView)).perform(click())
-
-       // onView(withId(R.id.changeEtName)).check(matches(isDisplayed()))
-
+            .perform(
+                scrollToLastPosition<ContactsAdapter.MyViewHolder>()
+            )
 
     }
 }

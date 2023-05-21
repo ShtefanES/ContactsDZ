@@ -13,7 +13,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), LifecycleObserver {
 
-    private lateinit var binding: ActivityMainBinding
+     lateinit var binding: ActivityMainBinding
 
     private val defaultLifecycleObserver = object : DefaultLifecycleObserver {
         override fun onCreate(owner: LifecycleOwner) {
@@ -41,10 +41,9 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter = ContactsAdapter { contact ->
+        val adapter = ContactsAdapter{ contact ->
             viewModel.editContact(contact)
         }
-
         viewModel.allContacts.observe(this) {
             adapter.setData(it)
         }
