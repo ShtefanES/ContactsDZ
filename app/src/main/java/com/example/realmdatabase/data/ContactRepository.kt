@@ -1,12 +1,13 @@
 package com.example.realmdatabase.data
 
-import com.example.realmdatabase.data.model.Contact
+import androidx.lifecycle.LiveData
+import com.example.realmdatabase.domain.entity.ContactModel
 
 interface ContactRepository {
 
     fun addContact(name: String, surname: String, number: String)
 
-    fun getContact(): List<Contact>
+    fun getContactsLiveData(): LiveData<List<ContactModel>>
 
-   fun changeContact(contact: Contact)
+   fun changeContact(contact: ContactModel)
 }

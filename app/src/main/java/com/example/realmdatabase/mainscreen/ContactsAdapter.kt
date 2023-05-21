@@ -3,23 +3,21 @@ package com.example.realmdatabase.mainscreen
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.realmdatabase.R
-import com.example.realmdatabase.data.model.Contact
 import com.example.realmdatabase.databinding.ItemContactBinding
+import com.example.realmdatabase.domain.entity.ContactModel
 
-class ContactsAdapter(val onEditButtonClicked: (Contact) -> Unit) :
-    ListAdapter<Contact, ContactsAdapter.MyViewHolder>(MyDiffUtil) {
+class ContactsAdapter(val onEditButtonClicked: (ContactModel) -> Unit) :
+    ListAdapter<ContactModel, ContactsAdapter.MyViewHolder>(MyDiffUtil) {
 
-    object MyDiffUtil : DiffUtil.ItemCallback<Contact>() {
-        override fun areItemsTheSame(oldItem: Contact, newItem: Contact): Boolean {
+    object MyDiffUtil : DiffUtil.ItemCallback<ContactModel>() {
+        override fun areItemsTheSame(oldItem: ContactModel, newItem: ContactModel): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Contact, newItem: Contact): Boolean {
+        override fun areContentsTheSame(oldItem: ContactModel, newItem: ContactModel): Boolean {
             return oldItem.id == newItem.id
         }
     }
@@ -28,9 +26,9 @@ class ContactsAdapter(val onEditButtonClicked: (Contact) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
 
         val imageViewEdit: ImageView = binding.imageView
-        fun bind(contact: Contact?) {
-            binding.tvNameAndSurname.text = "${contact?.name} ${contact?.surname}"
-            binding.tvNumber.text = contact?.number
+        fun bind(contact: ContactModel) {
+            binding.tvNameAndSurname.text = "${contact.name} ${contact.surname}"
+            binding.tvNumber.text = contact.number
         }
     }
 
@@ -54,7 +52,7 @@ class ContactsAdapter(val onEditButtonClicked: (Contact) -> Unit) :
 
     }
 
-    fun setData(allContacts: List<Contact>) {
+    fun setData(allContacts: List<ContactModel>) {
         this.submitList(allContacts)
         notifyDataSetChanged()
     }
