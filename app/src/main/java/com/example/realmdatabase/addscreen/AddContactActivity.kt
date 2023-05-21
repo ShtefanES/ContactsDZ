@@ -1,12 +1,10 @@
 package com.example.realmdatabase.addscreen
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.realmdatabase.R
 import com.example.realmdatabase.databinding.ActivityAddContactBinding
-import com.example.realmdatabase.mainscreen.MainActivity
 import org.koin.android.ext.android.inject
 
 class AddContactActivity : AppCompatActivity(), AddContactView {
@@ -35,10 +33,5 @@ class AddContactActivity : AppCompatActivity(), AddContactView {
 
     override fun showAddContactSuccessInfo() {
         Toast.makeText(this, getString(R.string.add_contact_message), Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        startActivity(Intent(this, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP))
     }
 }
