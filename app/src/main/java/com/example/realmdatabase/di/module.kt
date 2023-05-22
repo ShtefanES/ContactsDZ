@@ -7,7 +7,6 @@ import com.example.realmdatabase.mainscreen.MainViewModel
 import com.example.realmdatabase.addscreen.AddContactPresenter
 import com.example.realmdatabase.data.ContactConverter
 import io.realm.Realm
-import io.realm.RealmConfiguration
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -16,16 +15,7 @@ val appModule = module {
 
     single<Realm> {
         Realm.init(androidApplication())
-
-        val configuration = RealmConfiguration.Builder()
-            .name("todo.db")
-            .deleteRealmIfMigrationNeeded()
-            .schemaVersion(0)
-            .allowWritesOnUiThread(true)
-            .allowQueriesOnUiThread(true)
-            .build()
-
-        Realm.setDefaultConfiguration(configuration)
+        Realm.setDefaultConfiguration(get())
 
         Realm.getDefaultInstance()
     }

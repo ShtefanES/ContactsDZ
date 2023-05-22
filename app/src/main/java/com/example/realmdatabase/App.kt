@@ -2,6 +2,7 @@ package com.example.realmdatabase
 
 import android.app.Application
 import com.example.realmdatabase.di.appModule
+import com.example.realmdatabase.di.productionRealmConfigModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -11,7 +12,7 @@ class App : Application() {
 
         startKoin {
             androidContext(this@App)
-            modules(appModule)
+            modules(appModule, productionRealmConfigModule)
         }
     }
 }

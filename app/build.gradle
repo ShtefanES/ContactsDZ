@@ -15,7 +15,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.example.realmdatabase.InstrumentationTestRunner"
     }
 
     buildTypes {
@@ -33,6 +33,9 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
     namespace 'com.example.realmdatabase'
 }
@@ -53,6 +56,7 @@ dependencies {
     implementation "androidx.test.espresso:espresso-contrib:3.5.1"
     androidTestImplementation 'androidx.test:runner:1.4.0'
     androidTestImplementation 'androidx.test:rules:1.4.0'
+    androidTestUtil 'androidx.test:orchestrator:1.4.0'
 
     // Koin Core features
     implementation "io.insert-koin:koin-core:$koin_version"
