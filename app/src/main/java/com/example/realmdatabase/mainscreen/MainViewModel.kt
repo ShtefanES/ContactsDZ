@@ -5,8 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.realmdatabase.data.ContactRepository
 import com.example.realmdatabase.domain.entity.ContactModel
+import javax.inject.Inject
 
-class MainViewModel(private val contactRepository: ContactRepository) : ViewModel() {
+class MainViewModel @Inject constructor(private val contactRepository: ContactRepository) : ViewModel() {
     private val _goChangeContactScreenEvent = SingleLiveEvent<ContactModel>()
     val goChangeContactScreenEvent: LiveData<ContactModel> = _goChangeContactScreenEvent
     val allContacts: LiveData<List<ContactModel>>

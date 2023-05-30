@@ -6,8 +6,9 @@ import com.example.realmdatabase.data.model.Contact
 import com.example.realmdatabase.domain.entity.ContactModel
 import io.realm.Realm
 import java.util.*
+import javax.inject.Inject
 
-class ContactRepositoryImpl(
+class ContactRepositoryImpl @Inject constructor(
     private val realm: Realm,
     private val contactConverter: ContactConverter,
 ) : ContactRepository {

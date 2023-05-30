@@ -1,7 +1,6 @@
 package com.example.realmdatabase.mainscreen
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.*
@@ -9,9 +8,10 @@ import com.example.realmdatabase.addscreen.AddContactActivity
 import com.example.realmdatabase.changescren.ChangeContactActivity
 import com.example.realmdatabase.databinding.ActivityMainBinding
 import com.example.realmdatabase.domain.entity.ContactModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), LifecycleObserver {
+class MainActivity : DaggerAppCompatActivity(), LifecycleObserver {
 
      lateinit var binding: ActivityMainBinding
 
@@ -32,7 +32,8 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         }
     }
 
-    private val viewModel: MainViewModel by viewModel()
+    @Inject
+    lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

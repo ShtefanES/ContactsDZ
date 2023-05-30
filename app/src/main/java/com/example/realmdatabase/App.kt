@@ -1,18 +1,11 @@
 package com.example.realmdatabase
 
-import android.app.Application
-import com.example.realmdatabase.di.appModule
-import com.example.realmdatabase.di.productionRealmConfigModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
+import com.example.realmdatabase.di.DaggerAppComponent
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-class App : Application() {
-    override fun onCreate() {
-        super.onCreate()
+class App : DaggerApplication() {
 
-        startKoin {
-            androidContext(this@App)
-            modules(appModule, productionRealmConfigModule)
-        }
-    }
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
+        DaggerAppComponent.builder().context(applicationContext).build()
 }
