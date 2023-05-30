@@ -2,15 +2,17 @@ package com.example.realmdatabase.addscreen
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.realmdatabase.R
 import com.example.realmdatabase.databinding.ActivityAddContactBinding
-import org.koin.android.ext.android.inject
+import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
-class AddContactActivity : AppCompatActivity(), AddContactView {
+class AddContactActivity : DaggerAppCompatActivity(), AddContactView {
 
     private lateinit var binding: ActivityAddContactBinding
-    private val addContactPresenter: AddContactPresenter by inject()
+
+    @Inject
+    lateinit var addContactPresenter: AddContactPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

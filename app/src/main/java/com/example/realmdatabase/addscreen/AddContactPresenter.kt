@@ -1,8 +1,9 @@
 package com.example.realmdatabase.addscreen
 
 import com.example.realmdatabase.data.ContactRepository
+import javax.inject.Inject
 
-class AddContactPresenter(private val contactRepository: ContactRepository) {
+class AddContactPresenter @Inject constructor(private val contactRepository: ContactRepository) {
 
     private var addContactView: AddContactView? = null
 
