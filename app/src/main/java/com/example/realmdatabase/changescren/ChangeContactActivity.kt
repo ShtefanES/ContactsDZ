@@ -1,8 +1,6 @@
 package com.example.realmdatabase.changescren
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import org.koin.android.ext.android.inject
 import android.content.Context
 import android.content.Intent
 import android.widget.EditText
@@ -10,12 +8,14 @@ import android.widget.Toast
 import com.example.realmdatabase.R
 import com.example.realmdatabase.databinding.ActivityChangeContactBinding
 import com.example.realmdatabase.domain.entity.ContactModel
-import org.koin.core.parameter.parametersOf
+import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
-class ChangeContactActivity : AppCompatActivity(), ChangeContactView {
+class ChangeContactActivity : DaggerAppCompatActivity(), ChangeContactView {
 
+    @Inject
+    lateinit var presenter: ChangeContactPresenter
 
-    private val presenter: ChangeContactPresenter by inject { parametersOf(intent.getSerializableExtra(ID_CONTACT) as ContactModel) }
     private val binding by lazy { ActivityChangeContactBinding.inflate(layoutInflater) }
 
     private val etName: EditText by lazy { binding.changeEtName }
@@ -23,7 +23,7 @@ class ChangeContactActivity : AppCompatActivity(), ChangeContactView {
     private val etNumber: EditText by lazy { binding.changeEtNumber }
 
     companion object {
-        private const val ID_CONTACT = "ID_CONTACT"
+        const val ID_CONTACT = "ID_CONTACT"
         fun createIntent(
             context: Context,
             contact: ContactModel

@@ -1,6 +1,7 @@
 package com.example.realmdatabase.di
 
 import com.example.realmdatabase.addscreen.AddContactActivity
+import com.example.realmdatabase.changescren.ChangeContactActivity
 import com.example.realmdatabase.mainscreen.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -15,4 +16,8 @@ abstract class ActivityBindingModule {
 	@ActivityScope
 	@ContributesAndroidInjector
 	abstract fun provideAddContactActivity(): AddContactActivity
+
+	@ActivityScope
+	@ContributesAndroidInjector(modules = [ChangeContactModule::class])
+	abstract fun provideChangeContactActivity(): ChangeContactActivity
 }

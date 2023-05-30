@@ -2,8 +2,9 @@ package com.example.realmdatabase.changescren
 
 import com.example.realmdatabase.data.ContactRepository
 import com.example.realmdatabase.domain.entity.ContactModel
+import javax.inject.Inject
 
-class ChangeContactPresenter(
+class ChangeContactPresenter @Inject constructor(
     private val contactRepository: ContactRepository,
     private val contact: ContactModel
 ) {
